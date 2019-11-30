@@ -3,7 +3,7 @@
 //
 //  https://adventofcode.com/2018
 //
-//  Created by vipermuffin 
+//  Created by vipermuffin
 //  Copyright © 2018 vipermuffin. All rights reserved.
 //
 #pragma once
@@ -34,9 +34,12 @@ namespace AocUtils {
         void step(T);
         void reset();
         T position() const;
+        T velocity() const;
+        T acceleration() const;
         T currentTimeStep() const;
         std::string name() const;
-        
+
+
     private:
         std::string _name;
         T _timeStepSize;
@@ -49,7 +52,7 @@ namespace AocUtils {
         T _OnTimerInSteps;
         T _OffTimerInSteps;
     };
-    
+
     template<typename T>
     LinearTraveler<T>::LinearTraveler(const std::string& id,
                                    const T timestepsize,
@@ -69,7 +72,7 @@ namespace AocUtils {
     _OnTimerInSteps{0},
     _OffTimerInSteps{0}
     {}
-    
+
     template<typename T>
     LinearTraveler<T>::LinearTraveler() :
     _name{"NULL_ID"},
@@ -83,42 +86,42 @@ namespace AocUtils {
     _OnTimerInSteps{0},
     _OffTimerInSteps{0}
     {}
-    
+
     template<typename T>
     void LinearTraveler<T>::setTimestep(const T timestepsize) {
         _timeStepSize = timestepsize;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::setAccelerationPerTimestep(const T accel) {
         _acceleration = accel;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::setVelocityPerTimeStep(const T v) {
         _velocity = v;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::setPosition(const T pos) {
         _position = pos;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::setName(const std::string& name) {
         _name = name;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::setOnTimeInSteps(const T onTimeInSteps) {
         _onTimeInSteps = onTimeInSteps;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::setOffTimeInSteps(const T offTimeInSteps) {
         _offTimeInSteps = offTimeInSteps;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::step() {
         if(_offTimeInSteps != 0) {
@@ -141,29 +144,39 @@ namespace AocUtils {
 
         _currentTimeStep += _timeStepSize;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::step(T time) {
         for(T i = 0; i < time; i += _timeStepSize) {
             this->step();
         }
     }
-    
+
     template<typename T>
     T LinearTraveler<T>::position() const {
         return _position;
     }
-    
+
+    template<typename T>
+    T LinearTraveler<T>::velocity() const {
+        return _velocity;
+    }
+
+    template<typename T>
+    T LinearTraveler<T>::acceleration() const {
+        return _acceleration;
+    }
+
     template<typename T>
     T LinearTraveler<T>::currentTimeStep() const {
         return _currentTimeStep;
     }
-    
+
     template<typename T>
     std::string LinearTraveler<T>::name() const {
         return _name;
     }
-    
+
     template<typename T>
     void LinearTraveler<T>::reset() {
         _position = 0;

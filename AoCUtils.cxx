@@ -80,6 +80,19 @@ std::vector<std::string> parseCsvLineForWords(const std::string& line)
    return words;
 }
 
+std::vector<int> parseCsvLineForNum(const std::string& line)
+{
+    string noCsvLine{line};
+    auto itr = noCsvLine.begin();
+    while(itr != noCsvLine.end()) {
+        if(*itr == ',') {
+            *itr = ' ';
+        }
+        itr++;
+    }
+    return parseLineForNumbers(noCsvLine);
+}
+
 std::vector<int> parseLineForNumbers(const std::string& line)
 {
    vector<int> numbers{};

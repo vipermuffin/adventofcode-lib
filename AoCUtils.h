@@ -18,6 +18,7 @@ std::vector<std::vector<int>> parseFileForNumbers(const std::string&);
 std::vector<int> parseFileForNumberPerLine(const std::string&);
 std::vector<std::string> parseLineForWords(const std::string&);
 std::vector<std::string> parseCsvLineForWords(const std::string&);
+std::vector<int> parseCsvLineForNum(const std::string&);
 std::vector<int> parseLineForNumbers(const std::string&);
 std::string convertVectorToString(const std::vector<int>&);
 void printVector(const std::vector<int>& v);

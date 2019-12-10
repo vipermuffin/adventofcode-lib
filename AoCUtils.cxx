@@ -107,6 +107,33 @@ std::vector<int> parseLineForNumbers(const std::string& line)
    return numbers;
 }
 
+std::vector<long> parseCsvLineForLongNum(const std::string& line)
+{
+    string noCsvLine{line};
+    auto itr = noCsvLine.begin();
+    while(itr != noCsvLine.end()) {
+        if(*itr == ',') {
+            *itr = ' ';
+        }
+        itr++;
+    }
+    return parseLineForLongNumbers(noCsvLine);
+}
+
+std::vector<long> parseLineForLongNumbers(const std::string& line)
+{
+   vector<long> numbers{};
+   vector<string> words{parseLineForWords(line)};
+   for(const auto& word : words) {
+      try {
+         numbers.push_back(stol(word));
+      } catch (const std::invalid_argument&) {
+         //Conversion failed
+      }
+   }
+   return numbers;
+}
+
 std::string convertVectorToString(const std::vector<int>&input)
 {
    string s{};
